@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#141312">
-<meta name="description" content="스마트폰 홈 화면을 망치, 총, 화염, 폭탄, 벌레로 부수는 스트레스 해소 게임">
+<meta name="description" content="바뿌(바탕화면 뿌수기): 내 폰 홈 화면을 망치, 총, 화염, 폭탄, 벌레로 부수는 스트레스 해소 게임">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="바탕화면 부수기">
+<meta name="apple-mobile-web-app-title" content="바뿌">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
-<title>바탕화면 부수기</title>
+<title>바뿌</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;600&display=swap">
@@ -39,7 +39,7 @@ body{touch-action:manipulation;word-break:keep-all;background:var(--bg);color:va
 .app{height:100%;box-sizing:border-box;max-width:520px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left)) max(16px,env(safe-area-inset-right));padding-block:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px}
 
 .hud{display:flex;align-items:center;gap:12px}
-.hud h1{margin:0;font-family:var(--display);font-weight:400;font-size:22px;line-height:1;letter-spacing:-.01em;white-space:nowrap}
+.hud h1{margin:0;font-family:var(--display);font-weight:400;font-size:30px;line-height:1;letter-spacing:-.02em;white-space:nowrap}
 .hud h1 span{color:var(--accent)}
 .meter{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
 .meter-top{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;color:var(--muted);letter-spacing:.06em}
@@ -104,20 +104,37 @@ body{touch-action:manipulation;word-break:keep-all;background:var(--bg);color:va
 .picker-list button span{font-size:11px;color:var(--muted);line-height:1.35}
 .picker-list button[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
 .picker-list button[aria-pressed="true"] b{color:var(--accent)}
-.install-tip{position:absolute;left:12px;right:12px;top:12px;z-index:3;display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:16px;
+.install-tip{position:absolute;left:12px;right:12px;top:12px;z-index:6;display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:16px;
   background:rgba(20,19,18,.92);border:1px solid var(--line);font-size:13px;line-height:1.45;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 .install-tip p{margin:0;flex:1;min-width:0}
 .install-tip b{color:var(--accent)}
 .install-tip button{flex:none;border:0;border-radius:10px;padding:6px 10px;background:var(--panel-2);color:var(--fg);font-family:var(--ui);font-size:12px;cursor:pointer}
 .install-tip .go{background:var(--accent);color:var(--accent-ink);font-weight:600}
-@media (max-width:360px){.hud h1{font-size:18px}.rack button{font-size:9.5px}}
+body.wide .app{max-width:min(1400px,100%)}
+.start{position:absolute;inset:0;z-index:5;display:grid;place-items:center;padding:16px;box-sizing:border-box;
+  background:rgba(10,9,8,.6);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);overflow-y:auto}
+.start-card{width:100%;max-width:320px;display:flex;flex-direction:column;align-items:stretch;gap:10px;text-align:center}
+.start .logo{margin:0;font-family:var(--display);font-weight:400;font-size:84px;line-height:.95;letter-spacing:-.03em;
+  color:var(--fg);text-shadow:0 5px 0 #000,0 0 40px rgba(255,140,30,.45)}
+.start .logo span{color:var(--accent)}
+.start .sub{margin:0 0 10px;font-size:14px;letter-spacing:.3em;color:var(--muted)}
+.btn-main,.btn-sub{border-radius:16px;padding:15px 16px;font-family:var(--display);font-size:20px;cursor:pointer;border:0}
+.btn-main{background:var(--accent);color:var(--accent-ink);box-shadow:0 5px 0 #a35e00}
+.btn-main:active{transform:translateY(3px);box-shadow:0 2px 0 #a35e00}
+.btn-sub{background:var(--panel);color:var(--fg);border:1px solid var(--line);font-size:16px;padding:12px 16px}
+.btn-main:focus-visible,.btn-sub:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.start .how{margin:6px 0 0;font-size:13px;line-height:1.55;color:var(--fg)}
+.start .how b{color:var(--accent);font-weight:600}
+.start .note{margin:0;font-size:11px;color:var(--muted)}
+.start .err{margin:0;font-size:13px;color:#ffb3a8}
+@media (max-width:360px){.hud h1{font-size:26px}.rack button{font-size:9.5px}}
 </style>
 </head>
 <body>
 
 <div class="app">
   <header class="hud">
-    <h1>바탕화면<span>부수기</span></h1>
+    <h1>바<span>뿌</span></h1>
     <div class="meter">
       <div class="meter-top"><span>파손율</span><b id="pct">0%</b></div>
       <div class="bar"><i id="barFill"></i></div>
@@ -135,9 +152,23 @@ body{touch-action:manipulation;word-break:keep-all;background:var(--bg);color:va
     <canvas id="fx"></canvas>
     <div class="combo" id="combo" hidden><b id="comboN">0</b><span>콤보</span></div>
     <div class="kills" id="kills" hidden>처치 <span id="killN">0</span></div>
-    <p class="hint" id="hint">무기 버튼을 <b>꾹 누르면</b> 다른 종류로 바꿀 수 있어요</p>
+    <p class="hint off" id="hint">무기 버튼을 <b>꾹 누르면</b> 다른 종류로 바꿀 수 있어요</p>
     <div class="toast" id="toast" hidden>완전히 박살!<small>새 화면 버튼으로 다시 시작</small></div>
     <button class="detonate" id="detonate" hidden>기폭</button>
+    <div class="start" id="start">
+      <div class="start-card">
+        <h2 class="logo">바<span>뿌</span></h2>
+        <p class="sub">바탕화면 뿌수기</p>
+        <button class="btn-main" id="startCapture" hidden>지금 화면 캡처해서 시작</button>
+        <button class="btn-main" id="startPick">내 화면으로 시작</button>
+        <button class="btn-sub" id="startAgain" hidden>방금 그 화면으로 다시</button>
+        <button class="btn-sub" id="startDefault">기본 화면으로 시작</button>
+        <p class="err" id="startErr" hidden></p>
+        <p class="how" id="startHow">먼저 홈 화면을 스크린샷으로 찍어 두세요. 그다음 <b>내 화면으로 시작</b>을 누르고 방금 찍은 사진을 고르면 돼요.</p>
+        <p class="note">사진은 이 기기 안에서만 쓰이고 어디로도 보내지 않아요.</p>
+      </div>
+      <input type="file" id="filePick" accept="image/*" hidden>
+    </div>
     <div class="install-tip" id="installTip" hidden>
       <p id="installText">홈 화면에 추가하면 앱처럼 전체 화면으로 할 수 있어요.</p>
       <button class="go" id="installGo" hidden>설치</button>
@@ -341,8 +372,18 @@ function blob(c, x, y, r, col) {
   const g = c.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, col); g.addColorStop(1, 'rgba(0,0,0,0)');
   c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2);
 }
+let userImg = null;
 function drawHome() {
   const c = bctx; c.save(); c.globalCompositeOperation = 'source-over'; c.globalAlpha = 1;
+  if (userImg) { // the player's own screenshot, scaled to cover the stage
+    const iw = userImg.naturalWidth || userImg.width, ih = userImg.naturalHeight || userImg.height, s = Math.max(W / iw, H / ih);
+    c.fillStyle = '#000'; c.fillRect(0, 0, W, H);
+    c.imageSmoothingQuality = 'high';
+    c.drawImage(userImg, (W - iw * s) / 2, (H - ih * s) / 2, iw * s, ih * s);
+    c.restore();
+    dmg.fill(0); dirty = false; wrecked = false; shownPct = -1; updateMeter();
+    return;
+  }
   const g = c.createLinearGradient(0, 0, W * .5, H);
   g.addColorStop(0, '#13246b'); g.addColorStop(.55, '#5b2a8c'); g.addColorStop(1, '#e8657a');
   c.fillStyle = g; c.fillRect(0, 0, W, H);
@@ -1407,7 +1448,6 @@ rack.addEventListener('click', e => {
   if (g === weapon) openPicker(g); else setWeapon(g);
 });
 refreshRack();
-showHint('무기 버튼을 <b>꾹 누르면</b> 다른 종류로 바꿀 수 있어요', 4000);
 
 const soundBtn = document.getElementById('sound');
 soundBtn.addEventListener('click', () => {
@@ -1415,14 +1455,67 @@ soundBtn.addEventListener('click', () => {
   document.getElementById('waves').hidden = muted; document.getElementById('mutex').hidden = !muted;
   if (master) master.gain.value = muted ? 0 : .9;
 });
-document.getElementById('reset').addEventListener('click', () => {
+function clearGame() {
   parts.length = 0; bombs.length = 0; crits.length = 0; fires.length = 0; drips.length = 0; dooms.length = 0; attract = null;
-  toastEl.hidden = true; detBtn.hidden = true;
+  pointers.clear(); toastEl.hidden = true; detBtn.hidden = true;
   combo = 0; fever = false; flashA = 0; comboEl.hidden = true; stage.classList.remove('fever');
   kills = 0; killsEl.hidden = true;
   if (AC) { rumbleG.gain.cancelScheduledValues(AC.currentTime); rumbleG.gain.setValueAtTime(0, AC.currentTime); }
-  drawHome(); const v = vinfo(weapon, sel[weapon]); showHint(`<b>${v.name}</b> · ${v.d}`);
+}
+
+/* ---------- start screen: my screenshot / screen capture / default ---------- */
+const startEl = document.getElementById('start'), startErr = document.getElementById('startErr');
+const filePick = document.getElementById('filePick');
+const btnCapture = document.getElementById('startCapture'), btnPick = document.getElementById('startPick'), btnAgain = document.getElementById('startAgain');
+const UA = navigator.userAgent;
+const onIOS = /iphone|ipad|ipod/i.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const onAndroid = /android/i.test(UA);
+const canCapture = !onIOS && !onAndroid && !!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia);
+const startHow = document.getElementById('startHow');
+if (onIOS) startHow.innerHTML = '먼저 홈 화면에서 <b>측면 버튼 + 볼륨 올리기</b>를 같이 눌러 스크린샷을 찍어 두세요. 그다음 <b>내 화면으로 시작</b>을 누르고 방금 찍은 사진을 고르면 돼요.';
+else if (onAndroid) startHow.innerHTML = '먼저 홈 화면에서 <b>전원 + 볼륨 내리기</b>를 같이 눌러 스크린샷을 찍어 두세요. 그다음 <b>내 화면으로 시작</b>을 누르고 방금 찍은 사진을 고르면 돼요.';
+else if (canCapture) {
+  btnCapture.hidden = false; btnPick.className = 'btn-sub'; btnPick.textContent = '사진 파일 고르기';
+  startHow.innerHTML = '<b>지금 화면 캡처</b>를 누르고 공유 창에서 <b>전체 화면</b>을 고르세요. 바탕화면이 잘 보이게 하려면 다른 창을 먼저 내려 두세요.';
+}
+let firstStart = true;
+startEl.addEventListener('pointerdown', e => e.stopPropagation());
+function showStart() {
+  startErr.hidden = true; btnAgain.hidden = !userImg; startEl.hidden = false;
+}
+function begin() {
+  clearGame(); startEl.hidden = true;
+  document.body.classList.toggle('wide', !!userImg && (userImg.naturalWidth || userImg.width) > (userImg.naturalHeight || userImg.height) && innerWidth > 700);
+  requestAnimationFrame(() => { W = 0; resize(); drawHome(); });
+  if (firstStart) { firstStart = false; showHint('무기 버튼을 <b>꾹 누르면</b> 다른 종류로 바꿀 수 있어요', 4000); }
+  else { const v = vinfo(weapon, sel[weapon]); showHint(`<b>${v.name}</b> · ${v.d}`); }
+}
+function startError(msg) { startErr.textContent = msg; startErr.hidden = false; }
+btnPick.addEventListener('click', () => { initAudio(); filePick.value = ''; filePick.click(); });
+filePick.addEventListener('change', () => {
+  const f = filePick.files && filePick.files[0]; if (!f) return;
+  const url = URL.createObjectURL(f), img = new Image();
+  img.onload = () => { userImg = img; begin(); };
+  img.onerror = () => { URL.revokeObjectURL(url); startError('이 사진은 열 수 없어요. 다른 스크린샷을 골라 주세요.'); };
+  img.src = url;
 });
+btnCapture.addEventListener('click', async () => {
+  initAudio();
+  let stream;
+  try { stream = await navigator.mediaDevices.getDisplayMedia({ video: { displaySurface: 'monitor' }, audio: false }); }
+  catch (e) { startError('캡처가 취소됐어요. 다시 누르거나 사진 파일을 골라 주세요.'); return; }
+  try {
+    const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.srcObject = stream;
+    await v.play(); await new Promise(r => setTimeout(r, 350));
+    const c = document.createElement('canvas'); c.width = v.videoWidth; c.height = v.videoHeight;
+    c.getContext('2d').drawImage(v, 0, 0);
+    userImg = c; begin();
+  } catch (e) { startError('화면을 캡처하지 못했어요. 사진 파일 고르기로 해 주세요.'); }
+  finally { stream.getTracks().forEach(t => t.stop()); }
+});
+btnAgain.addEventListener('click', () => { initAudio(); begin(); });
+document.getElementById('startDefault').addEventListener('click', () => { initAudio(); userImg = null; begin(); });
+document.getElementById('reset').addEventListener('click', () => { clearGame(); drawHome(); showStart(); });
 
 /* ---------- main loop ---------- */
 let lastT = performance.now(), beepT = 0;
