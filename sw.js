@@ -1,5 +1,5 @@
 // Offline cache: the game shell is cached on install; Google Fonts are cached the first time they load.
-const CACHE = 'phone-smash-v2';
+const CACHE = 'phone-smash-v3';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-180.png'];
 
 self.addEventListener('install', e => {

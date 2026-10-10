@@ -1153,7 +1153,30 @@ const sfx = {
   rustle() { burst(.12, 'highpass', 5000, .08); },
   moan() { tone(170, 110, .9, .12, 'sawtooth'); tone(175, 105, .9, .08, 'sawtooth'); }
 };
-function buzz(p) { try { navigator.vibrate && navigator.vibrate(p); } catch (e) {} }
+// Galaxy/Android: real vibration. iPhone (iOS 18+): Safari has no vibrate API, but toggling a
+// hidden <input switch> plays the system haptic tick, so patterns become a few quick ticks.
+const canVibrate = typeof navigator.vibrate === 'function';
+const hapticIOS = !canVibrate && (/iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+let hapticEl = null, lastTick = 0;
+function iosTick() {
+  const now = performance.now(); if (now - lastTick < 35) return; lastTick = now;
+  try {
+    if (!hapticEl) {
+      hapticEl = document.createElement('label'); hapticEl.setAttribute('aria-hidden', 'true'); hapticEl.style.display = 'none';
+      const input = document.createElement('input'); input.type = 'checkbox'; input.setAttribute('switch', ''); input.tabIndex = -1;
+      hapticEl.appendChild(input); document.body.appendChild(hapticEl);
+    }
+    hapticEl.click();
+  } catch (e) {}
+}
+function buzz(p) {
+  if (canVibrate) { try { navigator.vibrate(p); } catch (e) {} return; }
+  if (!hapticIOS) return;
+  if (Array.isArray(p)) {
+    let at = 0;
+    p.forEach((d, i) => { if (i % 2 === 0) { setTimeout(iosTick, at); if (d >= 150) setTimeout(iosTick, at + 80); } at += d; });
+  } else iosTick();
+}
 function shake(px, ms) {
   if (reduceMotion || !stage.animate) return;
   const f = []; for (let i = 0; i < 7; i++) { const d = px * (1 - i / 7); f.push({ transform: `translate(${rand(-d, d)}px,${rand(-d, d)}px)` }); }
