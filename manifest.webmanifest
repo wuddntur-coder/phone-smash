@@ -1,0 +1,17 @@
+{
+  "name": "바탕화면 부수기",
+  "short_name": "바탕화면 부수기",
+  "description": "스마트폰 홈 화면을 망치, 총, 화염, 폭탄, 벌레로 부수는 스트레스 해소 게임",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#141312",
+  "theme_color": "#141312",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
